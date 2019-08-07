@@ -1,0 +1,33 @@
+{
+    "name": "monmonja/php-widgets",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.2.3",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpWidgets\\": "src/PhpWidgets/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev"
+}
