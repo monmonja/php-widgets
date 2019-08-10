@@ -1,10 +1,15 @@
 <?php
-namespace PhpWidgets;
+namespace PhpWidgets\Html;
 
-class ScaffoldOptions {
+use PhpWidgets\Widget;
+
+trait ScaffoldVariables {
   protected $overlays;
   protected $body;
+}
 
+class ScaffoldOptions {
+  use ScaffoldVariables;
   public function setBody (Widget $body) {
     $this->body = $body;
     return $this;
@@ -17,22 +22,15 @@ class ScaffoldOptions {
 }
 
 class Scaffold extends Widget {
-  protected $overlays;
-  protected $body;
+  use ScaffoldVariables;
 
   public static function options () {
     return new ScaffoldOptions();
   }
 
-  public function __construct(ScaffoldOptions $options) {
-    $optionsArr = (function(){
-      return [
-        'overlays' => $this->overlays,
-        'body' => $this->body,
-      ];
-    })->call($options);
-    $this->overlays = $optionsArr['overlays'];
-    $this->body = $optionsArr['body'];
+  public function __construct(LinkOptions $options = null)
+  {
+    $this->mapOptionsToVariable($options);
   }
 
   public function render() {

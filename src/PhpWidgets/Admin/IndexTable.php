@@ -111,14 +111,14 @@ class IndexTable extends Widget {
       }
       $html .= "<td class='actions'>";
       if (!empty($this->viewRoutes)) {
-        $html .= "<a href=\"" . route($this->viewRoutes, ['uuid' => $row->id]) . "\">View</a> &bull;";
+        $html .= "<a href=\"" . route($this->viewRoutes, ['uuid' => $row->id ?? $row['id']]) . "\">View</a> &bull;";
       }
 
       if (!empty($this->editRoutes)) {
-        $html .= "<a  href=\"" . route($this->editRoutes, ['uuid' => $row->id]) . "\">Edit</a> &bull;";
+        $html .= "<a  href=\"" . route($this->editRoutes, ['uuid' => $row->id ?? $row['id']]) . "\">Edit</a> &bull;";
       }
       if (!empty($this->deleteRoutes)) {
-        $html .= "<a class=' delete-btn' href=\"" . route($this->deleteRoutes, ['uuid' => $row->id]) . "\">Delete</a>";
+        $html .= "<a class=' delete-btn' href=\"" . route($this->deleteRoutes, ['uuid' => $row->id ?? $row['id']]) . "\">Delete</a>";
       }
       $html .= "</td>";
 

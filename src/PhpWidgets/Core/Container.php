@@ -1,8 +1,9 @@
 <?php
-namespace PhpWidgets;
+namespace PhpWidgets\Core;
 
 use PhpWidgets\Html\Traits\DomOptions;
 use PhpWidgets\Html\Traits\DomVariables;
+use PhpWidgets\Widget;
 
 trait ContainerVariables {
   use DomVariables;

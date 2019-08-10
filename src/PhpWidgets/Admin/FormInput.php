@@ -3,8 +3,6 @@ namespace PhpWidgets\Admin;
 
 use PhpWidgets\Forms\Input;
 use PhpWidgets\Forms\InputOptions;
-use PhpWidgets\Html\Traits\DomOptions;
-use PhpWidgets\Html\Traits\DomVariables;
 use PhpWidgets\Options;
 use PhpWidgets\Widget;
 
