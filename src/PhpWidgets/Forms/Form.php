@@ -2,17 +2,20 @@
 namespace PhpWidgets\Forms;
 
 use PhpWidgets\Html\Traits\DomVariables;
+use PhpWidgets\Html\Traits\DomOptions;
 use PhpWidgets\Options;
 use PhpWidgets\Widget;
 
 trait FormOptionsVariable {
+  use DomVariables;
+
   protected $children;
   protected $action;
   protected $method;
 }
 
-class FormOptions extends Options {
-  use FormOptionsVariable;
+class FormOptions extends DomOptions {
+  use FormOptionsVariable, DomVariables;
 
   public function setChildren (array $children) {
     $this->children = $children;
@@ -50,7 +53,7 @@ class Form extends Widget {
     }
     $attr = implode(' ', $otherAttributes);
 
-    $html = "<form {$attr}>";
+    $html = "<form {$this->getAttribute($this->options)} {$attr}>";
     foreach ($this->children as $children) {
       $html .=  $children->render();
     }
@@ -60,6 +63,11 @@ class Form extends Widget {
   public function getJavascript()
   {
     return implode("", array_map(function(Widget $item) { return  $item->getJavascript(); }, $this->children));
+  }
+
+  public function getCSS()
+  {
+    return implode("", array_map(function(Widget $item) { return  $item->getCSS(); }, $this->children));
   }
 
 }

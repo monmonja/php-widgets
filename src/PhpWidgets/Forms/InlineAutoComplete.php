@@ -14,6 +14,7 @@ trait InlineAutoCompleteVariables {
   protected $inputOptions;
   protected $componentWrapperClass;
   protected $formUrl;
+  protected $onFocusJs;
 }
 
 class InlineAutoCompleteOptions extends DomOptions {
@@ -37,6 +38,11 @@ class InlineAutoCompleteOptions extends DomOptions {
 
   public function setInputOptions(InputOptions $inputOptions): InlineAutoCompleteOptions  {
     $this->inputOptions = $inputOptions;
+    return $this;
+  }
+
+  public function setOnFocusJs(string $onFocusJs): InlineAutoCompleteOptions  {
+    $this->onFocusJs = $onFocusJs;
     return $this;
   }
 
@@ -94,6 +100,7 @@ HTML;
           .on('focus', function(e){
                 e.preventDefault();
                 $("#{$inputOptionsAr['id']}").parents('.{$this->className}').find('.{$this->className}-result').show();  
+                {$this->onFocusJs}
           })
           .on('keyup', function(){
               let obj = this;

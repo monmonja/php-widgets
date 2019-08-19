@@ -15,4 +15,13 @@ class DomOptions extends Options {
     $this->className = $className;
     return $this;
   }
+
+  public function addClass(string $className)  {
+    if (empty($this->className)) {
+      $this->className = $className;
+    } else {
+      $this->className .= ' ' . $className;
+    }
+    return $this;
+  }
 }

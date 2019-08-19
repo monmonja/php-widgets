@@ -15,7 +15,7 @@ trait LinkVariables {
   protected $href;
 }
 
-class LinkOptions  extends DomOptions {
+class LinkOptions extends DomOptions {
   use LinkVariables;
   protected $child;
   protected $href;

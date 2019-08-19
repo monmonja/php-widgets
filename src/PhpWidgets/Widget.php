@@ -19,7 +19,15 @@ abstract class Widget  {
     }
   }
 
+  public function getWidget() {
+    return '';
+  }
+  
   public function getJavascript() {
+    return '';
+  }
+
+  public function getCSS() {
     return '';
   }
 
