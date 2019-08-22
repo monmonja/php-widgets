@@ -9,19 +9,19 @@ class IndexTableFields {
   public $name;
   public $label;
   public $replaceAr;
+  public $renderer;
 
-  public static function make($name, $label, $replaceAr = null) : IndexTableFields{
+  public static function make($name, $label, $replaceAr = null, $renderer = null) : IndexTableFields{
     $field = new IndexTableFields();
     $field->name = $name;
     $field->label = $label;
     $field->replaceAr = $replaceAr;
+    $field->renderer = $renderer;
     return $field;
   }
 }
 trait IndexTableVariables {
   use DomVariables;
-  /** @var Widget[] */
-  protected $children;
   /** @var DomOptions */
   protected $rowOptions;
   /** @var IndexTableFields[] */
@@ -34,11 +34,6 @@ trait IndexTableVariables {
 
 class IndexTableOptions extends DomOptions {
   use IndexTableVariables;
-
-  public function setChildren (array $children) {
-    $this->children = $children;
-    return $this;
-  }
 
   public function setFields (array $fields) {
     $this->fields = $fields;
@@ -96,17 +91,18 @@ class IndexTable extends Widget {
     foreach ($this->data as $key => $row) {
       $html .= "<tr>";
       foreach ($this->fields as $field) {
-        $path = explode(".", $field->name);
-        $path = "['" . implode("']['", $path) . "']";
-        eval("\$originalValue = \$row{$path};");
-
-        if ($field->replaceAr != null) {
-          $value = isset($field->replaceAr[$originalValue]) ?
-            $field->replaceAr[$originalValue] : $originalValue
-          ;
-          $html .= "<td class='{$field->name}'>" . $value . "</td>";
+        if ($field->renderer != null) {
+          $html .= "<td class='{$field->name}'>" . call_user_func_array($field->renderer, [$row]) . "</td>";
         } else {
-          $html .= "<td class='{$field->name}'>" . $originalValue . "</td>";
+          $originalValue = $row[$field->name];
+
+          if ($field->replaceAr != null) {
+            $value = isset($field->replaceAr[$originalValue]) ?
+              $field->replaceAr[$originalValue] : $originalValue;
+            $html .= "<td class='{$field->name}'>" . $value . "</td>";
+          } else {
+            $html .= "<td class='{$field->name}'>" . $originalValue . "</td>";
+          }
         }
       }
       $html .= "<td class='actions'>";
