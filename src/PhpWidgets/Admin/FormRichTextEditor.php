@@ -53,9 +53,9 @@ class FormRichTextEditor extends Widget {
   public function __construct(FormRichTextEditorOptions $options)
   {
     $this->mapOptionsToVariable($options);
-    if ($this->label == null) { die("FormRichTextEditor: name is required"); }
-    if ($this->value == null) { die("FormRichTextEditor: value is required"); }
-    if ($this->editorId == null) { die("FormRichTextEditor: name is required"); }
+    if ($this->label === null) { die("FormRichTextEditor: name is required"); }
+    if ($this->value === null) { die("FormRichTextEditor: value is required"); }
+    if ($this->editorId === null) { die("FormRichTextEditor: editorId is required"); }
   }
 
   public function render() {

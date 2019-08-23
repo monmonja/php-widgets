@@ -106,16 +106,18 @@ class IndexTable extends Widget {
         }
       }
       $html .= "<td class='actions'>";
+      $htmlRoutes = [];
       if (!empty($this->viewRoutes)) {
-        $html .= "<a href=\"" . route($this->viewRoutes, ['uuid' => $row->id ?? $row['id']]) . "\">View</a> &bull;";
+        array_push($htmlRoutes, "<a href=\"" . route($this->viewRoutes, ['uuid' => $row->id ?? $row['id']]) . "\">View</a>");
       }
 
       if (!empty($this->editRoutes)) {
-        $html .= "<a  href=\"" . route($this->editRoutes, ['uuid' => $row->id ?? $row['id']]) . "\">Edit</a> &bull;";
+        array_push($htmlRoutes,"<a  href=\"" . route($this->editRoutes, ['uuid' => $row->id ?? $row['id']]) . "\">Edit</a>");
       }
       if (!empty($this->deleteRoutes)) {
-        $html .= "<a class=' delete-btn' href=\"" . route($this->deleteRoutes, ['uuid' => $row->id ?? $row['id']]) . "\">Delete</a>";
+        array_push($htmlRoutes, "<a class=' delete-btn' href=\"" . route($this->deleteRoutes, ['uuid' => $row->id ?? $row['id']]) . "\">Delete</a>");
       }
+      $html .= implode(" &bull; ", $htmlRoutes);
       $html .= "</td>";
 
       $html .= "</tr>";
