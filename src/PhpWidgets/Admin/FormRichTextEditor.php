@@ -10,7 +10,7 @@ trait FormRichTextEditorVariables {
   protected $editorId;
   protected $label;
   protected $value;
-  protected $name;
+  protected $name = 'content';
   protected $uploadImagePath;
 }
 
@@ -53,7 +53,7 @@ class FormRichTextEditor extends Widget {
   public function __construct(FormRichTextEditorOptions $options)
   {
     $this->mapOptionsToVariable($options);
-    if ($this->label === null) { die("FormRichTextEditor: name is required"); }
+    if ($this->label === null) { die("FormRichTextEditor: label is required"); }
     if ($this->value === null) { die("FormRichTextEditor: value is required"); }
     if ($this->editorId === null) { die("FormRichTextEditor: editorId is required"); }
   }
@@ -65,7 +65,7 @@ class FormRichTextEditor extends Widget {
           <label>{$this->label}</label>
           <div class="form-component">
               <div id="{$this->editorId}"  class="rte-field" ></div>
-              <input type="hidden" id="{$this->editorId}-hidden" name="content" />
+              <input type="hidden" id="{$this->editorId}-hidden" name="{$this->name}" />
           </div>
       </div>
      $rteHtml 
