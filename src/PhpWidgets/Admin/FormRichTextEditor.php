@@ -65,7 +65,7 @@ class FormRichTextEditor extends Widget {
           <label>{$this->label}</label>
           <div class="form-component">
               <div id="{$this->editorId}"  class="rte-field" ></div>
-              <input type="hidden" id="{$this->editorId}-hidden" name="{$this->name}" />
+              <input type="hidden" id="{$this->editorId}-hidden" class="rte-field-hidden-element" name="{$this->name}" />
           </div>
       </div>
      $rteHtml 
@@ -74,6 +74,7 @@ HTML;
 
   public function getRteContent ($elementId, $value) {
     $uploadPath = $this->uploadImagePath;
+    $basePath = env('ADMIN_URL_PREFIX') ?: 'admin';
     return <<< HTML
 <link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.snow.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -158,7 +159,7 @@ HTML;
 
                 node.addEventListener('click', function(ev) {
                     ev.preventDefault();
-                    openModuleSelector("{{env('ADMIN_URL_PREFIX') ?: 'admin'}}", node.dataset, function (object) {
+                    openModuleSelector("", node.dataset, function (object) {
                         console.log('update', object);
                         setDataSet(object);
                     });
@@ -213,7 +214,7 @@ HTML;
                         "image2": function (value) {
                             var currentQuill = this.quill;
                             const range = currentQuill.getSelection();
-                            openFileManager("{{env('ADMIN_URL_PREFIX') ?: 'admin'}}", "$uploadPath", function(url) {
+                            openFileManager("$basePath", "$uploadPath", function(url) {
                                 quill.insertEmbed(range.index, 'image', `\${url}`);
                             });
 
@@ -262,6 +263,9 @@ HTML;
             if (hiddenValueEl) {
                 hiddenValueEl.val(quill.root.innerHTML);
             }
+        });
+        hiddenValueEl.on('trigger-quill-change', function () {
+            quill.pasteHTML(hiddenValueEl.val());            
         });
 
         if (editorContent) {

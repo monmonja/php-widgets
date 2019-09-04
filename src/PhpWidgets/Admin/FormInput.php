@@ -35,8 +35,8 @@ class FormInput extends Widget {
   public function __construct(FormInputOptions $options)
   {
     $this->mapOptionsToVariable($options);
-    if ($this->label == null) { die("FormInput: name is required"); }
-    if ($this->inputOptions == null) { die("FormInput: name is required"); }
+    if ($this->label == null) { die("FormInput: label is required"); }
+    if ($this->inputOptions == null) { die("FormInput: inputOptions is required"); }
   }
 
   public function render() {

@@ -9,7 +9,6 @@ abstract class Widget  {
   abstract public function render();
 
   protected function mapOptionsToVariable(Options $options) {
-
     $this->options = $options;
     $optionsArr = (function(){
       return get_object_vars($this);
