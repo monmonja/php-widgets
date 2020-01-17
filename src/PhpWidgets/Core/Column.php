@@ -11,6 +11,7 @@ trait ColumnVariables {
   protected $children;
   /** @var DomOptions */
   protected $rowOptions;
+  protected $itemClassName = "column-item";
 }
 
 class ColumnOptions extends DomOptions {
@@ -22,6 +23,10 @@ class ColumnOptions extends DomOptions {
   }
   public function setColumnOptions (DomOptions $rowOptions) {
     $this->rowOptions = $rowOptions;
+    return $this;
+  }
+  public function setItemClassName ($itemClassName) {
+    $this->itemClassName = $itemClassName;
     return $this;
   }
 }
@@ -37,7 +42,7 @@ class Column extends Widget {
     $this->mapOptionsToVariable($options);
     if ($this->rowOptions == null) {
       $this->rowOptions = new DomOptions();
-      $this->rowOptions->setClassName("column-item");
+      $this->rowOptions->setClassName($this->itemClassName);
     }
   }
 
