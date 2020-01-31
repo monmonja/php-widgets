@@ -5,7 +5,6 @@ use PhpWidgets\Forms\Input;
 use PhpWidgets\Forms\InputOptions;
 use PhpWidgets\Html\Traits\DomOptions;
 use PhpWidgets\Html\Traits\DomVariables;
-use PhpWidgets\Options;
 use PhpWidgets\Widget;
 
 trait FormSlugVariables {
@@ -49,7 +48,7 @@ class FormSlug extends Widget {
 
     return <<< JS
 $("#{$this->inputId}").on('keyup', function() {
-    $("#{$optionsArr['id']}").val($(this).val().replace(/[\W_]+/g, '-'));
+    $("#{$optionsArr['id']}").val($(this).val().replace(/[\W_]+/g, '-').toLowerCase());
 });
   
 JS;
