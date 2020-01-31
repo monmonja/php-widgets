@@ -121,7 +121,7 @@ HTML;
             }
         }
         SmartBreak.blotName = 'break';
-        SmartBreak.tagName = 'BR'
+        SmartBreak.tagName = 'BR';
         Quill.register(SmartBreak);
 
         class ScriptModule extends BlockEmbed {

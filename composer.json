@@ -1,10 +1,9 @@
 {
     "name": "monmonja/php-widgets",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Php Widgets",
     "keywords": [
-        "framework",
-        "laravel"
+        "monmonja"
     ],
     "license": "MIT",
     "require": {

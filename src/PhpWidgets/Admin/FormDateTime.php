@@ -12,6 +12,7 @@ trait FormDateTimeVariables {
   protected $dateOptions;
   /** @var InputOptions */
   protected $timeOptions;
+  /** @var string */
   protected $label;
 }
 
