@@ -13,6 +13,7 @@ trait InputVariables {
   protected $autoComplete;
   protected $name;
   protected $value;
+  protected $readOnly;
   protected $type = 'text';
 }
 
@@ -38,6 +39,10 @@ class InputOptions extends DomOptions {
 
   public function setAutoComplete(string $autoComplete): InputOptions  {
     $this->autoComplete = $autoComplete;
+    return $this;
+  }
+  public function setReadOnly(bool $readOnly): InputOptions  {
+    $this->readOnly = $readOnly;
     return $this;
   }
 
@@ -74,6 +79,9 @@ class Input extends Widget {
 
     if ($this->value) {
       array_push($otherAttributes, "value='{$this->value}'");
+    }
+    if ($this->readOnly) {
+      array_push($otherAttributes, 'readonly');
     }
     $attr = implode(' ', $otherAttributes);
 
